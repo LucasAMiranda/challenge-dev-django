@@ -1,0 +1,54 @@
+version: '3'
+
+services:
+  rabbitmq:
+    image: "rabbitmq:3-management"
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+
+  api:
+  build: .
+  container_name: api
+  env_file: .env
+  environment:
+    - DJANGO_SETTINGS_MODULE=emprestimo.settings
+    - DATABASE_URL=sqlite:///application/db.sqlite3
+  command: bash -c "python manage.py shell script/create_superuser.py && python manage.py runserver 0.0.0.0:8000"
+  volumes:
+    - .:/application
+  depends_on:
+    - rabbitmq
+  links:
+    - rabbitmq
+  ports:
+    - "8000:8000"
+
+
+  dev_container:
+    build: .
+    container_name: app
+    env_file: .env
+    volumes:
+      - .:/application
+    depends_on:
+      - rabbitmq
+    links:
+      - rabbitmq
+      - database
+    expose:
+      - "8000"
+    environment:
+      - DJANGO_SETTINGS_MODULE=emprestimo.settings
+
+
+  celery:
+    container_name: celery
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/application
+    depends_on:
+      - rabbitmq
+    command: celery -A emprestimo worker --loglevel=info

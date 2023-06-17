@@ -4,6 +4,8 @@ from .serializers import PropostaSerializer
 from .proposals import avaliar_proposta
 from rest_framework import generics
 from rest_framework.response import Response
+from rest_framework.mixins import CreateModelMixin, UpdateModelMixin, DestroyModelMixin
+
 
 def proposta_form_view(request):
     if request.method == 'POST':
@@ -28,17 +30,7 @@ def proposta_form_view(request):
     return render(request, 'form_proposta.html', context)
 
 
-class PropostaUpdateAPIView(generics.UpdateAPIView):
-    queryset = Proposta.objects.all()
-    serializer_class = PropostaSerializer
-
-
-class PropostaListAPIView(generics.ListAPIView):
-    queryset = Proposta.objects.all()
-    serializer_class = PropostaSerializer
-
-
-class PropostaCreateAPIView(generics.CreateAPIView):
+class PropostaCreateAPIView(CreateModelMixin, generics.GenericAPIView):
     queryset = Proposta.objects.all()
     serializer_class = PropostaSerializer
 
@@ -46,15 +38,25 @@ class PropostaCreateAPIView(generics.CreateAPIView):
         proposta = serializer.save()
         avaliar_proposta.delay(proposta.id)
 
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+    
 
-class PropostaDeleteAPIView(generics.DestroyAPIView):
+class PropostaListAPIView(generics.ListAPIView):
     queryset = Proposta.objects.all()
     serializer_class = PropostaSerializer
 
-    def destroy(self, request, *args, **kwargs):
-        instance = self.get_object()
-        self.perform_destroy(instance)
-        return Response({'message': 'Proposta excluída com sucesso.'})
 
-    def perform_destroy(self, instance):
-        instance.delete()
+class PropostaUpdateAPIView(UpdateModelMixin, generics.GenericAPIView):
+    queryset = Proposta.objects.all()
+    serializer_class = PropostaSerializer
+
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+class PropostaDeleteAPIView(DestroyModelMixin, generics.GenericAPIView):
+    queryset = Proposta.objects.all()
+    serializer_class = PropostaSerializer
+    
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)

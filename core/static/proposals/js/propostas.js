@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function updateProposta(event) {
         event.preventDefault();
         const propostaItem = event.target.closest('li');
-        const propostaLink = propostaItem.querySelector('.proposta-link');
+        const propostaLink = propostaItem.querySelector('.proposta-spán');
         const nomeCompleto = prompt('Digite o novo nome completo:');
         const cpf = prompt('Digite o novo CPF:');
         const endereco = prompt('Digite o novo endereço:');

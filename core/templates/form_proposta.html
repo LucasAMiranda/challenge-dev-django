@@ -24,7 +24,7 @@
             <ul id="propostas">
                 {% for proposta in propostas %}
                 <li>
-                    <a href="#" data-id="{{ proposta.id }}" class="proposta-link">{{ proposta.nome_completo }} - CPF: {{ proposta.cpf }} - Endereço: {{ proposta.endereco }} - Valor: {{ proposta.valor_emprestimo }}</a>
+                    <span data-id="{{ proposta.id }}" class="proposta-span">{{ proposta.nome_completo }} - CPF: {{ proposta.cpf }} - Endereço: {{ proposta.endereco }} - Valor: {{ proposta.valor_emprestimo }}</a>
                     <button type="button" class="btn btn-danger btn-sm delete-btn" data-id="{{ proposta.id }}">Deletar</button>
                     <button type="button" class="btn btn-secondary mt-3 atualizar-btn" data-id="{{ proposta.id }}">Atualizar</button>
                 </li>

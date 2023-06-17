@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 from decouple import config
 
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -41,6 +43,7 @@ INSTALLED_APPS = [
     'core',
     'rest_framework',
     'django_celery_results',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -85,7 +88,7 @@ DATABASES = {
 }
 
 CELERY_BROKER_URL = config(
-    'CELERY_BROKER_URL', 'amqp://guest:guest@192.168.0.100:5672//')
+      'CELERY_BROKER_URL', 'amqp://guest:guest@localhost:5672//')
 CELERY_ENABLE_UTC = config('CELERY_ENABLE_UTC', False)
 # Custom Celery  settings
 CELERY_MAX_RETRIES = config('CELERY_MAX_RETRIES', 5)

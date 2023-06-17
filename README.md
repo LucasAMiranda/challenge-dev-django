@@ -19,7 +19,8 @@
 
 <p>Foto do Projeto em Produção </p>
 
-![image](https://github.com/LucasAMiranda/challenge-dev-django/assets/35241256/ac1f9d86-fc9d-4e25-acac-bfeef6b7d703)
+![image](https://github.com/LucasAMiranda/challenge-dev-django/assets/35241256/bb98777e-2826-4e4f-9a73-4e615fcc77ee)
+
 
 <p> Foto das Listagens da API </p>
 

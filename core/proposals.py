@@ -4,16 +4,35 @@ import logging
 
 @shared_task
 def avaliar_proposta(id, status):
-    logging.warning(f'Starting {id} task!')
+    logging.warning(f'Iniciando tarefa {id}!')
     try:
-        new_status = status.get('status')
-        instance = Proposta.objects.get(id=id)
-        instance.status = new_status
-        instance.save()
+        novo_status = status.get('status')
+        instancia = Proposta.objects.get(id=id)
+        instancia.status = novo_status
+        instancia.save()
     except Proposta.DoesNotExist:
-        logging.warning(f'Proposta with id {id} does not exist.')
+        logging.warning(f'Proposta com ID {id} não existe.')
     except Exception as err:
-        logging.error(f'Error processing task: {err}')
+        logging.error(f'Erro ao processar tarefa: {err}')
         raise err
     finally:
-        logging.warning('Finished task!')
+        logging.warning('Tarefa finalizada!')
+
+
+@shared_task
+def verificar_propostas():
+    logging.warning('Iniciando tarefa!')
+    try:
+        propostas = Proposta.objects.all()
+        for proposta in propostas:
+            if proposta.status != 'Aprovado' and proposta.status != 'Recusado':
+                if proposta.valor_emprestimo >= 1000:
+                    proposta.status = 'Aprovado'
+                else:
+                    proposta.status = 'Recusado'
+                proposta.save()
+    except Exception as err:
+        logging.error(f'Erro ao processar tarefa: {err}')
+        raise err
+    finally:
+        logging.warning('Tarefa finalizada!')

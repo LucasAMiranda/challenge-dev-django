@@ -5,8 +5,6 @@
 <h2>Realize todos os testes da Api criar, listar, deletar e atualizar dentro das rotas, perceba que está consumindo no front-end e no backend todos os dados. Consigo inserir dados dentro dos inputs para mostrar nas listagens das propostas.</h2>
 <p> Eu gosto de realizar os testes da api pelo próprio djangorestframework , mas fique à vontade em testar no postman ;)</p>
 
-# Sistema de Gestão de Propostas de Empréstimo Pessoal
-
 # INICIE E ATIVE O AMBIENTE VIRTUAL 
 
 `python -m venv nome_da_virtualenv`

@@ -13,17 +13,6 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 # Localização dos tasks do Celery
 app.autodiscover_tasks()
 
-# configurações específicas do Celery
-app.conf.update(
-    # Definir o intervalo de tempo entre as verificações de tarefas
-    beat_schedule={
-        'verificar-propostas': {
-            'task': 'core.verificar_propostas',
-            'schedule': 300,  # A cada 5 minutos (300 segundos)
-        },
-    },
-)
-
 @app.task(bind=True)
 def debug_task(self):
     print(f'Request: {self.request!r}')

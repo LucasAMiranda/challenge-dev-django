@@ -7,6 +7,14 @@
 
 # Sistema de Gestão de Propostas de Empréstimo Pessoal
 
+# INICIE E ATIVE O AMBIENTE VIRTUAL 
+
+`python -m venv nome_da_virtualenv`
+
+`nome-da-virtualenv\Scripts\activate` - windows
+
+`source nome_da_virtualenv/bin/activate (Linux ou macOS)`
+
 # INSTALE TODAS AS DEPENDÊNCIAS DO PROJETO 
 
 `pip install -r requirements.txt`

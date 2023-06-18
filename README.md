@@ -11,11 +11,16 @@
 
 `pip install -r requirements.txt`
 
-# EXECUTE DE DUAS FORMAS 
+# EXECUTE DE QUATRO FORMAS 
 
 `development: python manage.py runserver`
 
-`production : docker compose up --build` 
+`production : docker compose up --build`
+
+`docker build -t application .`
+
+`docker run -p 8000:8000 application`
+
 
 <p>Foto do Projeto em Produção </p>
 

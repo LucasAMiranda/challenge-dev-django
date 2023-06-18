@@ -87,13 +87,14 @@ DATABASES = {
     }
 }
 
-CELERY_BROKER_URL = config(
-      'CELERY_BROKER_URL', 'amqp://guest:guest@localhost:5672//')
-CELERY_ENABLE_UTC = config('CELERY_ENABLE_UTC', False)
-# Custom Celery  settings
-CELERY_MAX_RETRIES = config('CELERY_MAX_RETRIES', 5)
-CELERY_DEFAULT_RETRY_DELAY = config('CELERY_DEFAULT_RETRY_DELAY', 5)
-CELERY_DEFAULT_ASYNC_DELAY = config('CELERY_DEFAULT_ASYNC_DELAY', 5)
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CELERY_BROKER_URL = 'amqp://guest:guest@localhost:5672'
+CELERY_RESULT_BACKEND = 'django-db'
+
+CELERY_ACCEPT_CONTENT = ['application/json', 'json']
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TASK_SERIALIZER = 'json'
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators

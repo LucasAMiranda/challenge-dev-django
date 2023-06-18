@@ -11,9 +11,9 @@
 
 `python -m venv nome_da_virtualenv`
 
-`nome-da-virtualenv\Scripts\activate` - windows
+`nome_da_virtualenv\Scripts\activate` - windows
 
-`source nome_da_virtualenv/bin/activate (Linux ou macOS)`
+`source nome_da_virtualenv/bin/activate - (Linux ou macOS)`
 
 # INSTALE TODAS AS DEPENDÊNCIAS DO PROJETO 
 
